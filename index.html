@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Veículos</title>
+    <style>
+        /* Estilos gerais para o aplicativo */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 3rem;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Formulários e Inputs */
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            background-color: #ecf0f1;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        /* Estilos da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #bdc3c7;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        th,
+        td {
+            padding: 12px;
+        }
+
+        th {
+            background-color: #ecf0f1;
+            color: #2980b9;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .form-container {
+            margin-bottom: 40px;
+        }
+
+        .history-table {
+            margin-top: 20px;
+        }
+
+        /* Estilos para a seção de loja */
+        .loja-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .loja-container h2 {
+            text-align: center;
+        }
+
+        .produto {
+            display: inline-block;
+            width: 23%;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .produto img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .produto h3 {
+            color: #2980b9;
+            margin-top: 15px;
+        }
+
+        .produto p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+
+        .produto .preco {
+            font-size: 1.2rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Botões de compra */
+        .btn-comprar {
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-comprar:hover {
+            background-color: #3498db;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Sistema de Gestão de Veículos</h1>
+
+        <!-- Cadastro de Veículos -->
+        <div class="form-container">
+            <h2>Cadastro de Veículo</h2>
+            <form id="formCadastro">
+                <label for="placa">Placa:</label>
+                <input type="text" id="placa" name="placa" required>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
+
+                <label for="cor">Cor:</label>
+                <input type="text" id="cor" name="cor" required>
+
+                <button type="submit">Cadastrar Veículo</button>
+            </form>
+        </div>
+
+        <!-- Histórico de Veículos -->
+        <div class="history-table">
+            <h2>Histórico de Veículos Cadastrados</h2>
+            <table id="tabelaHistorico">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Ano</th>
+                        <th>Cor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Histórico de veículos será exibido aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Controle Financeiro -->
+        <div class="form-container">
+            <h2>Controle Financeiro</h2>
+            <form id="formFinanceiro">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" required>
+
+                <label for="valor">Valor (R$):</label>
+                <input type="number" id="valor" name="valor" required>
+
+                <button type="submit">Adicionar Transação</button>
+            </form>
+        </div>
+
+        <!-- Tabela de Transações Financeiras -->
+        <div class="history-table">
+            <h2>Transações Financeiras</h2>
+            <table id="tabelaTransacoes">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Transações financeiras serão exibidas aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Loja de Acessórios -->
+        <div class="loja-container">
+            <h2>Loja de Acessórios para Carros</h2>
+            <div class="produto">
+                <img src="tapete2.jpg" alt="Tapete de Carro">
+                <h3>Tapete de Carro</h3>
+                <p>Tapete de alta qualidade para seu carro, confortável e durável.</p>
+                <p class="preco">R$ 99,90</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+
+            <div class="produto">
+                <img src="capadebanco.jpg" alt="Capa de Banco">
+                <h3>Capa de Banco</h3>
+                <p>Capa de banco para proteção e conforto, fácil de instalar.</p>
+                <p class="preco">R$ 149,90</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+
+            <div class="produto">
+                <img src="ferramentas.jpg" alt="Kit de Manutenção">
+                <h3>Kit de Manutenção</h3>
+                <p>Kit completo para manutenção básica do seu carro.</p>
+                <p class="preco">R$ 179,90</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+
+            <div class="produto">
+                <img src="lampada.jpg" alt="Lampadas LED">
+                <h3>Lâmpadas LED</h3>
+                <p>Lâmpadas LED para maior visibilidade e economia de energia.</p>
+                <p class="preco">R$ 59,90</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
